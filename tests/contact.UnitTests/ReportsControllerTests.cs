@@ -37,7 +37,7 @@ public class ReportsControllerTests
         var results = new Faker<ContactReportResponse>()
            .RuleFor(x => x.Location, f => f.Random.Word())
            .RuleFor(x => x.ContactCountInThatLocation, f => f.Random.Number())
-           .RuleFor(x => x.CommunicationCountInThatLocation, f => f.Random.Number())
+           .RuleFor(x => x.TelephoneNumberCountInThatLocation, f => f.Random.Number())
            .Generate(5);
 
         return results;

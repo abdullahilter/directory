@@ -6,5 +6,5 @@ public class ContactReportResponse
 
     public int ContactCountInThatLocation { get; set; } = 0;
 
-    public int CommunicationCountInThatLocation { get; set; } = 0;
+    public int TelephoneNumberCountInThatLocation { get; set; } = 0;
 }

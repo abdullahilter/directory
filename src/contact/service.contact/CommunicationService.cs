@@ -29,20 +29,32 @@ public class CommunicationService : ICommunicationService
 
     public async Task<List<ContactReportResponse>> GetReportAsync(CancellationToken cancellationToken)
     {
-        //var communications = await _repository.GetAllAsync(cancellationToken);
-        var locationCommunications = await _repository.GetAllAsync(x => x.TypeId == (int)CommunicationType.Location, cancellationToken);
+        var communications = await _repository.GetAllAsync(cancellationToken);
 
-        var result = (
+        var locationCommunications = communications.Where(x => x.TypeId == (int)CommunicationType.Location).ToList();
+        var locationContacts = locationCommunications.Select(x => new { x.Content, x.ContactId }).ToList();
+
+        var results = (
             from com in locationCommunications
             group com by com.Content into g
             select new ContactReportResponse
             {
                 Location = g.Key,
-                ContactCountInThatLocation = g.DistinctBy(d => d.ContactId).Count(),
-                CommunicationCountInThatLocation = g.Count()
+                ContactCountInThatLocation = g.DistinctBy(d => d.ContactId).Count()
             }).ToList();
 
-        return result ?? new List<ContactReportResponse>();
+        if (results is not null)
+            foreach (var item in results)
+            {
+                var contactIdsInThatLocation = locationContacts.Where(x => x.Content == item.Location)
+                    .Select(s => s.ContactId).Distinct().ToList();
+
+                item.TelephoneNumberCountInThatLocation = communications.Where(x =>
+                    x.TypeId == (int)CommunicationType.TelephoneNumber
+                    && contactIdsInThatLocation.Contains(x.ContactId)).Count();
+            }
+
+        return results ?? new List<ContactReportResponse>();
     }
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)

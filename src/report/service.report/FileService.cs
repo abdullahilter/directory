@@ -22,7 +22,7 @@ public class FileService : IFileService
         //Headers
         workSheet.Cell("A1").Value = "Location";
         workSheet.Cell("B1").Value = "Contact Count in that Location";
-        workSheet.Cell("C1").Value = "Communication Count in that Location";
+        workSheet.Cell("C1").Value = "Telephone Number Count in that Location";
 
         //Body
         for (int i = 0; i < data.Count; i++)
@@ -31,7 +31,7 @@ public class FileService : IFileService
 
             workSheet.Cell($"A{i + 2}").Value = row.Location;
             workSheet.Cell($"B{i + 2}").Value = row.ContactCountInThatLocation;
-            workSheet.Cell($"C{i + 2}").Value = row.CommunicationCountInThatLocation;
+            workSheet.Cell($"C{i + 2}").Value = row.TelephoneNumberCountInThatLocation;
         }
 
         //Styles
@@ -39,7 +39,7 @@ public class FileService : IFileService
         headerRow.Style.Font.SetBold();
         headerRow.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 
-        workSheet.Columns("A,B,C").Width = 35;
+        workSheet.Columns("A,B,C").Width = 40;
         workSheet.Cells("A1:C1").Style.Fill.SetBackgroundColor(XLColor.DarkGray);
 
         //Save
