@@ -20,19 +20,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "api.contact", "src\contact\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "api.report", "src\report\api.report\api.report.csproj", "{7AABBF77-13BF-43C7-B812-AE260A818388}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "service.contact", "src\contact\service.contact\service.contact.csproj", "{2FAFB892-1BAA-4CD3-A5BD-087D118369AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "service.contact", "src\contact\service.contact\service.contact.csproj", "{2FAFB892-1BAA-4CD3-A5BD-087D118369AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "entity.contact", "src\contact\entity.contact\entity.contact.csproj", "{A9807BE3-13EE-4984-AF2B-D4787EC045EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "entity.contact", "src\contact\entity.contact\entity.contact.csproj", "{A9807BE3-13EE-4984-AF2B-D4787EC045EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "entity.report", "src\report\entity.report\entity.report.csproj", "{048A4270-50B9-4089-9D98-DC85332A8610}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "entity.report", "src\report\entity.report\entity.report.csproj", "{048A4270-50B9-4089-9D98-DC85332A8610}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "service.report", "src\report\service.report\service.report.csproj", "{C32FFE8F-FA9B-455A-90AA-B43B12028327}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "service.report", "src\report\service.report\service.report.csproj", "{C32FFE8F-FA9B-455A-90AA-B43B12028327}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{4DC06AE2-BB7D-42B4-A9C2-C447929F6A1D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "entity.common", "src\common\entity.common\entity.common.csproj", "{29B517D3-7C05-43E9-A542-FF9E7C833EEA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "service.common", "src\common\service.common\service.common.csproj", "{D26A8054-AA0A-4142-9A78-8B9ED1D111C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "contact.UnitTests", "tests\contact.UnitTests\contact.UnitTests.csproj", "{8D1D1CD4-5B0C-4572-AD19-E19410965B13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +74,10 @@ Global
 		{D26A8054-AA0A-4142-9A78-8B9ED1D111C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D26A8054-AA0A-4142-9A78-8B9ED1D111C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D26A8054-AA0A-4142-9A78-8B9ED1D111C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D1D1CD4-5B0C-4572-AD19-E19410965B13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D1D1CD4-5B0C-4572-AD19-E19410965B13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D1D1CD4-5B0C-4572-AD19-E19410965B13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D1D1CD4-5B0C-4572-AD19-E19410965B13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +94,7 @@ Global
 		{4DC06AE2-BB7D-42B4-A9C2-C447929F6A1D} = {196AB475-673F-4F4A-A292-A833E0DE462C}
 		{29B517D3-7C05-43E9-A542-FF9E7C833EEA} = {4DC06AE2-BB7D-42B4-A9C2-C447929F6A1D}
 		{D26A8054-AA0A-4142-9A78-8B9ED1D111C8} = {4DC06AE2-BB7D-42B4-A9C2-C447929F6A1D}
+		{8D1D1CD4-5B0C-4572-AD19-E19410965B13} = {10DF1694-66F4-4296-9E5C-5EE3DAE19521}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {205CB39D-5A68-4344-9196-C2BFD67DC54D}
