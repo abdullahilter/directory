@@ -1,4 +1,5 @@
 using api.contact.Controllers;
+using Bogus;
 using entity.contact;
 using FluentAssertions;
 using Mapster;
@@ -33,7 +34,7 @@ public class ContactsControllerTests
     public async Task GetAsync_WithExisting_ReturnsExpectedContactDetail()
     {
         // Arrange
-        var expected = CreateRandomContactDetailResponse();
+        var expected = CreateRandomContactDetail();
 
         _contactServiceMock
             .Setup(service => service.GetAsync(It.IsAny<Guid>(), CancellationToken.None))
@@ -99,7 +100,7 @@ public class ContactsControllerTests
 
         var actual = (result as CreatedResult).Value as Contact;
 
-        request.Should().BeEquivalentTo(actual);
+        request.Should().BeEquivalentTo(actual, options => options.ExcludingMissingMembers());
     }
 
     [Fact]
@@ -117,34 +118,36 @@ public class ContactsControllerTests
         result.Should().BeOfType<NoContentResult>();
     }
 
-    private ContactDetailResponse CreateRandomContactDetailResponse()
+    private ContactDetailResponse CreateRandomContactDetail()
     {
-        return new()
-        {
-            Id = Guid.NewGuid(),
-            Name = "Abdullah",
-            Surname = "ÝLTER",
-            CompanyName = "ACME CORP",
-            Communications = new List<ContactCommunicationDto>()
-            {
-                new ContactCommunicationDto()
-                {
-                    Id = Guid.NewGuid(),
-                    TypeId = 1,
-                    Content = "5554443322"
-                }
-            }
-        };
+        var contactDetail = new Faker<ContactDetailResponse>()
+            .RuleFor(x => x.Id, f => Guid.NewGuid())
+            .RuleFor(x => x.Name, f => f.Person.FirstName)
+            .RuleFor(x => x.Surname, f => f.Person.LastName)
+            .RuleFor(x => x.CompanyName, f => f.Company.CompanyName())
+            .Generate();
+
+        var communication = new Faker<ContactCommunicationDto>()
+            .RuleFor(x => x.Id, f => Guid.NewGuid())
+            .RuleFor(x => x.TypeId, f => f.PickRandom(
+                (int)CommunicationType.TelephoneNumber, (int)CommunicationType.EMailAddress, (int)CommunicationType.Location))
+            .RuleFor(x => x.Content, f => f.Random.ToString())
+            .Generate();
+
+        contactDetail.Communications = new List<ContactCommunicationDto>() { communication };
+
+        return contactDetail;
     }
 
     private Contact CreateRandomContact()
     {
-        return new()
-        {
-            Id = Guid.NewGuid(),
-            Name = "Abdullah",
-            Surname = "ÝLTER",
-            CompanyName = "ACME CORP"
-        };
+        var contact = new Faker<Contact>()
+           .RuleFor(x => x.Id, f => Guid.NewGuid())
+           .RuleFor(x => x.Name, f => f.Person.FirstName)
+           .RuleFor(x => x.Surname, f => f.Person.LastName)
+           .RuleFor(x => x.CompanyName, f => f.Company.CompanyName())
+           .Generate();
+
+        return contact;
     }
 }
