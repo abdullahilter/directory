@@ -1,4 +1,4 @@
-﻿using entity.common;
+﻿using entity.report;
 using Refit;
 
 namespace service.report;

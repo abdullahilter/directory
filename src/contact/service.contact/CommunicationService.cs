@@ -29,10 +29,11 @@ public class CommunicationService : ICommunicationService
 
     public async Task<List<ContactReportResponse>> GetReportAsync(CancellationToken cancellationToken)
     {
-        var communications = await _repository.GetAllAsync(x => x.TypeId == (int)CommunicationType.Location, cancellationToken);
+        //var communications = await _repository.GetAllAsync(cancellationToken);
+        var locationCommunications = await _repository.GetAllAsync(x => x.TypeId == (int)CommunicationType.Location, cancellationToken);
 
         var result = (
-            from com in communications
+            from com in locationCommunications
             group com by com.Content into g
             select new ContactReportResponse
             {

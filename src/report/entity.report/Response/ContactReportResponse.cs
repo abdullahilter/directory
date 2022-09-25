@@ -1,4 +1,4 @@
-﻿namespace entity.common;
+﻿namespace entity.report;
 
 public class ContactReportResponse
 {

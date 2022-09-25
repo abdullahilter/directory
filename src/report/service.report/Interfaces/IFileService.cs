@@ -1,4 +1,4 @@
-﻿using entity.common;
+﻿using entity.report;
 
 namespace service.report;
 
