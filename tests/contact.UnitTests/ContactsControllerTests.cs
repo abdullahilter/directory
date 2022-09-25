@@ -5,7 +5,6 @@ using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using service.contact;
-using System.Collections.Generic;
 
 namespace contact.UnitTests;
 
@@ -18,7 +17,7 @@ public class ContactsControllerTests
     {
         // Arrange
         _contactServiceMock
-            .Setup(repo => repo.GetAsync(It.IsAny<Guid>(), CancellationToken.None))
+            .Setup(service => service.GetAsync(It.IsAny<Guid>(), CancellationToken.None))
             .ReturnsAsync((ContactDetailResponse)null);
 
         var controller = new ContactsController(_contactServiceMock.Object);
@@ -37,7 +36,7 @@ public class ContactsControllerTests
         var expected = CreateRandomContactDetailResponse();
 
         _contactServiceMock
-            .Setup(repo => repo.GetAsync(It.IsAny<Guid>(), CancellationToken.None))
+            .Setup(service => service.GetAsync(It.IsAny<Guid>(), CancellationToken.None))
             .ReturnsAsync(expected);
 
         var controller = new ContactsController(_contactServiceMock.Object);
@@ -50,7 +49,7 @@ public class ContactsControllerTests
 
         var okResult = result as OkObjectResult;
         var actual = okResult.Value as ContactDetailResponse;
-        actual.Should().BeEquivalentTo(expected, options => options.ComparingByMembers<ContactDetailResponse>());
+        actual.Should().BeEquivalentTo(expected);
     }
 
     [Fact]
@@ -63,7 +62,7 @@ public class ContactsControllerTests
             CreateRandomContact() };
 
         _contactServiceMock
-            .Setup(repo => repo.GetAllAsync(CancellationToken.None))
+            .Setup(service => service.GetAllAsync(CancellationToken.None))
             .ReturnsAsync(expecteds);
 
         var controller = new ContactsController(_contactServiceMock.Object);
@@ -76,7 +75,7 @@ public class ContactsControllerTests
 
         var okResult = result as OkObjectResult;
         var actual = okResult.Value as IReadOnlyCollection<Contact>;
-        actual.Should().BeEquivalentTo(expecteds, options => options.ComparingByMembers<Contact>());
+        actual.Should().BeEquivalentTo(expecteds);
     }
 
     [Fact]
@@ -87,7 +86,7 @@ public class ContactsControllerTests
         var expected = request.Adapt<Contact>();
 
         _contactServiceMock
-            .Setup(repo => repo.CreateAsync(request, CancellationToken.None))
+            .Setup(service => service.CreateAsync(request, CancellationToken.None))
             .ReturnsAsync(expected);
 
         var controller = new ContactsController(_contactServiceMock.Object);
@@ -100,7 +99,7 @@ public class ContactsControllerTests
 
         var actual = (result as CreatedResult).Value as Contact;
 
-        request.Should().BeEquivalentTo(actual, options => options.ComparingByMembers<Contact>().ExcludingMissingMembers());
+        request.Should().BeEquivalentTo(actual);
     }
 
     [Fact]
