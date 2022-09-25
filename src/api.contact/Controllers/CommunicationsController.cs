@@ -16,20 +16,20 @@ public class CommunicationsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IResult> CreateAsync(CreateCommunicationRequest model, CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateAsync(CreateCommunicationRequest model, CancellationToken cancellationToken)
     {
         var result = await _service.CreateAsync(model, cancellationToken);
 
-        if (result is null) return Results.NotFound();
+        if (result is null) return NotFound();
 
-        return Results.Created($"/communications/{result.Id}", result);
+        return Created($"/communications/{result.Id}", result);
     }
 
     [HttpDelete("{id:guid}")]
-    public async Task<IResult> DeleteAsync(Guid id, CancellationToken cancellationToken)
+    public async Task<IActionResult> DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
         await _service.DeleteAsync(id, cancellationToken);
 
-        return Results.NoContent();
+        return NoContent();
     }
 }

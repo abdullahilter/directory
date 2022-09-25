@@ -16,28 +16,28 @@ public class ReportsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IResult> CreateAsync(CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateAsync(CancellationToken cancellationToken)
     {
         await _service.CreateAsync(new CreateReportRequest(), cancellationToken);
 
-        return Results.Accepted();
+        return Accepted();
     }
 
     [HttpGet]
-    public async Task<IResult> GetAllAsync(CancellationToken cancellationToken)
+    public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
     {
         var results = await _service.GetAllAsync(cancellationToken);
 
-        return Results.Ok(results);
+        return Ok(results);
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<IResult> GetAsync(Guid id, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetAsync(Guid id, CancellationToken cancellationToken)
     {
         var result = await _service.GetAsync(id, cancellationToken);
 
-        if (result is null) return Results.NotFound();
+        if (result is null) return NotFound();
 
-        return Results.Ok(result);
+        return Ok(result);
     }
 }

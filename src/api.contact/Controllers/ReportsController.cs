@@ -16,7 +16,7 @@ public class ReportsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<List<ContactReportResponse>> GetReportAsync(Guid id, CancellationToken cancellationToken)
+    public async Task<List<ContactReportResponse>> GetReportAsync(CancellationToken cancellationToken)
     {
         var results = await _service.GetReportAsync(cancellationToken);
 
