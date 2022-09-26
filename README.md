@@ -1,5 +1,6 @@
 ## Tools
 - [Docker](https://www.docker.com/) - A set of platform as a service (PaaS) products that use OS-level virtualization to deliver software in packages called containers
+- [RabbitMQ](https://www.rabbitmq.com/) - The most widely deployed open source message broker
 - [MassTransit](https://masstransit-project.com/getting-started/) - A free, open-source distributed application framework
 - [Mapster](https://github.com/MapsterMapper/Mapster) - Object mapper library
 - [Refit](https://github.com/reactiveui/refit) - The automatic type-safe REST library
@@ -11,10 +12,9 @@
 - [Moq](https://github.com/moq/moq4) - The most popular and friendly mocking library
 
 ## How to run
-
-Install Docker Desktop
-Install Visual Studio
-Clone repository
+- Install Docker Desktop
+- Install Visual Studio
+- Clone repository
 
 Run below code on root directory of solution same level with "docker-compose.yml"
 ```
